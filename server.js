@@ -15,7 +15,7 @@ const openai = new OpenAI({
 
 app.use(bodyParser.json());
 
-app.post('/api/chat', async (req, res) => {
+app.post('https://salatydashboard.onrender.com/api/chat', async (req, res) => {
   const { message } = req.body;
 
   try {
