@@ -10,7 +10,7 @@ const Chat: React.FC = () => {
     setInput('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/chat', { message });
+      const response = await axios.post('https://salarydashboard111.netlify.app//api/chat', { message });
       const reply = response.data.reply;
       setMessages((prevMessages) => [...prevMessages, { sender: 'bot', text: reply }]);
     } catch (error) {
