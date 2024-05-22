@@ -35,7 +35,7 @@ const Chat: React.FC = () => {
         className="border border-gray-300 p-2 w-full"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        onKeyPress={(e) => {
+        onKeyDown={(e) => {
           if (e.key === 'Enter' && input.trim()) {
             sendMessage(input.trim());
           }
