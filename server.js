@@ -2,17 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { OpenAI } from 'openai';
 import 'dotenv/config';
+import Cors from 'cors';
 
 const app = express();
-const port = 5000;
+const port = 5002;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 app.use(bodyParser.json());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(Cors());
 
 app.post('/api/chat', async (req, res) => {
   const { message } = req.body;
@@ -22,11 +19,12 @@ app.post('/api/chat', async (req, res) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "text-davinci-003",
-      prompt: `You are an expert in analyzing ML Engineer salaries data. Provide insights based on the following user query: "${message}"`,
+      model: "gpt-3.5-turbo",  // Correct model name
+      messages: [{ role: 'user', content: message }], // Correct API parameters
       max_tokens: 150,
     });
-    const reply = completion.choices[0].text.trim();
+
+    const reply = completion.choices[0].message.content.trim();  // Correct response path
 
     // Log the OpenAI API response
     console.log('OpenAI API response:', completion);
