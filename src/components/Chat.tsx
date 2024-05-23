@@ -14,7 +14,7 @@ const Chat: React.FC = () => {
     setInput('');
 
     try {
-      const response = await fetch('https://backend-salary-dashboard.onrender.com/api/chat', {
+      const response = await fetch('https://backend-salary-dashboard.onrender.com/api/chat' , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
